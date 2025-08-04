@@ -1,46 +1,26 @@
-function getSentimentBadge(sentiment) {
-  let color = "bg-gray-400";
-  if (sentiment === "Bullish") color = "bg-green-500";
-  if (sentiment === "Bearish") color = "bg-red-500";
-  if (sentiment === "Neutral") color = "bg-yellow-500";
-  return `<span class="px-2 py-1 text-xs font-semibold text-white rounded ${color}">${sentiment}</span>`;
-}
-
 async function fetchNews() {
   const ticker = document.getElementById("search").value.trim();
   if (!ticker) return;
 
-  // Dummy news data (replace with API call)
-  const dummyNews = [
-    {
-      title: `AI-generated news for ${ticker}`,
-      date: new Date().toLocaleDateString(),
-      sentiment: "Bullish",
-      summary: `Stock ${ticker} shows potential upward movement due to recent market trends and positive investor sentiment.`,
-      url: "https://finance.yahoo.com"
-    },
-    {
-      title: `Market reacts to ${ticker} quarterly results`,
-      date: new Date().toLocaleDateString(),
-      sentiment: "Neutral",
-      summary: `${ticker} posted its Q2 results with mixed reactions from analysts.`,
-      url: "https://moneycontrol.com"
-    }
-  ];
+  const apiKey = "eb10b7c8d87747f0a157d10b6c6e69dc"; // Replace with your key
+  const url = `https://newsapi.org/v2/everything?q=${ticker}&language=en&sortBy=publishedAt&pageSize=5&apiKey=${apiKey}`;
+
+  const res = await fetch(url);
+  const data = await res.json();
 
   const container = document.getElementById("newsContainer");
   container.innerHTML = "";
 
-  dummyNews.forEach(article => {
+  data.articles.forEach(article => {
     const card = document.createElement("div");
     card.className = "bg-white p-5 shadow-md rounded-lg hover:shadow-lg transition transform hover:-translate-y-1";
     card.innerHTML = `
       <h2 class="text-lg font-bold mb-2">${article.title}</h2>
       <div class="flex justify-between items-center text-sm text-gray-600 mb-3">
-        <span>${article.date}</span>
-        ${getSentimentBadge(article.sentiment)}
+        <span>${new Date(article.publishedAt).toLocaleDateString()}</span>
+        <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">Neutral</span>
       </div>
-      <p class="text-gray-700 mb-3">${article.summary}</p>
+      <p class="text-gray-700 mb-3">${article.description || "No summary available."}</p>
       <a href="${article.url}" target="_blank" class="text-blue-600 hover:underline font-medium">Read more →</a>
     `;
     container.appendChild(card);
