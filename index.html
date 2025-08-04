@@ -3,37 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EQ-AI News</title>
+  <title>EQ-AI Stock News</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-blue-600 to-purple-700 text-white shadow-lg p-4 text-center">
-    <h1 class="text-3xl font-bold">📈 EQ-AI: Stock News App</h1>
-    <p class="text-sm opacity-80">AI-powered market insights at your fingertips</p>
+  <header class="bg-gradient-to-r from-green-600 to-blue-600 text-white p-5 shadow-md text-center">
+    <h1 class="text-3xl font-bold">📊 EQ-AI News App</h1>
+    <p class="text-sm opacity-80">AI Sentiment & Summary Powered News Feed</p>
   </header>
 
-  <div class="container mx-auto px-4 py-6">
-
-    <!-- Search -->
-    <div class="flex flex-col sm:flex-row items-center mb-6 gap-2">
-      <input id="search" type="text" placeholder="Search stock (e.g. INFY, TCS)" 
-        class="p-3 border-2 border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+  <main class="max-w-5xl mx-auto px-4 py-6">
+    <div class="flex flex-col sm:flex-row gap-4 items-center mb-6">
+      <input id="search" type="text" placeholder="Enter stock (e.g. INFY, TCS)" 
+        class="w-full p-3 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
       <button onclick="fetchNews()" 
-        class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg shadow transition">
+        class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded shadow">
         🔍 Search
       </button>
     </div>
 
-    <!-- News Container -->
-    <div id="newsContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="newsContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </main>
 
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 text-center py-4 mt-10">
-    Built with ❤️ by EQ-AI | Powered by TailwindCSS
+  <footer class="bg-gray-900 text-center text-white py-4 mt-10">
+    EQ-AI | Sentiment, Summary, and WhatsApp Alerts © 2025
   </footer>
 
   <script src="script.js"></script>
